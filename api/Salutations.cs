@@ -7,19 +7,20 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using BlazorStaticWebApp.Shared;
 
-namespace BlazorStaticWebApp.Function
+namespace api
 {
     public static class Salutations
     {
         [FunctionName("Salutations")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            Shared.SalutationsResponse response = new()
+            SalutationsResponse response = new()
             {
                 Message = "Salutations!"
             };
@@ -27,6 +28,4 @@ namespace BlazorStaticWebApp.Function
             return new OkObjectResult(response);
         }
     }
-
-
 }
