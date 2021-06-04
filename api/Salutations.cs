@@ -19,17 +19,14 @@ namespace BlazorStaticWebApp.Function
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            SalutationsResponse response = new()
+            Shared.SalutationsResponse response = new()
             {
-                message = "Salutations!"
+                Message = "Salutations!"
             };
 
             return new OkObjectResult(response);
         }
     }
 
-    public class SalutationsResponse
-    {
-        string message {get;set;}
-    }
+
 }

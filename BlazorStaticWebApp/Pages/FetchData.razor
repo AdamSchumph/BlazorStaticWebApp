@@ -3,7 +3,14 @@
 
 <h1>Weather Forecast</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+@if (salutationsResponse == null)
+{
+    <p>This component demonstrates fetching data from the server.</p>
+}
+else
+{
+    <p>@salutationsResponse.Message! This component demonstrates fetching data from the server.</p>
+}
 
 @if (forecasts == null)
 {
@@ -36,10 +43,12 @@ else
 
 @code {
     private WeatherForecast[] forecasts;
+    private SalutationsResponse salutationsResponse;
 
     protected override async Task OnInitializedAsync()
     {
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        salutationsResponse = await Http.GetFromJsonAsync<SalutationsResponse>("/api/message");
     }
 
     public class WeatherForecast
